@@ -1,0 +1,27 @@
+import tweepy
+from textblob import TextBlob
+consumer_key = 'nUphRW6DccwhKcPY3ACp7j23B'
+consumer_secret = 'QSUWMeC8iRSMnwB6QnZFdRuTMXuQ7PcVc76j9frmfMuZ7V2CFt'
+access_token = '107925943-oNPrfaiYouH9rgcrrPp3cDpmR9rMTv1L1C0EWPSS'
+access_token_secret = 'l8ZtDSTaDWomVh9nGaqWLjvPFoWltv6xnPgKxSeDYD71M'
+
+auth = tweepy.OAuthHandler (consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+TwitterApi= tweepy.API(auth)
+public_tweets = TwitterApi.search("Tesco")
+
+
+tweet_data = {'Tweet': [],
+        'Polarity': [],
+        'Subjectivty': []}
+
+import pandas as pd
+for tweet in public_tweets:
+    analysis = TextBlob(tweet.text)
+
+    tweet_data["Tweet"].append(tweet.text)
+    tweet_data["Polarity"].append(str(analysis.sentiment.polarity))
+    tweet_data["Subjectivty"].append(str(analysis.sentiment.subjectivity))
+
+df = pd.DataFrame(tweet_data, columns = ['Tweet', 'Polarity', 'Subjectivty'])
+df
