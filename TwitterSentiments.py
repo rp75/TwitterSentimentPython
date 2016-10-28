@@ -8,7 +8,7 @@ access_token_secret = '<Your key>'
 auth = tweepy.OAuthHandler (consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 TwitterApi= tweepy.API(auth)
-public_tweets = TwitterApi.search("Tesco")
+public_tweets = TwitterApi.search("Tatagroup")
 
 
 tweet_data = {'Tweet': [],
